@@ -119,4 +119,37 @@ stateDiagram
 
 ---
 
+
+```mermaid
+stateDiagram
+    [*] --> A
+    A --> master
+    A --> B
+```
+
+Let's suppose I (squash and) merge the branch into `master`, and continue working in own branch:
+
+
+---
+
+```mermaid
+stateDiagram
+    [*] --> A
+    A --> squash
+    A --> B
+    B --> wip
+```
+
+where `wip` has not been commited. Then I could stash it, change to master, and pop from the stash:
+
+```bash
+git stash
+git checkout master
+git fetch origin && git reset --hard origin/master
+git checkout -b new-branch
+git stash pop
+```
+
+---
+
 ### Thanks for listening
