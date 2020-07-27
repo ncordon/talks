@@ -13,11 +13,6 @@ p {
   margin-left: auto;
 }
 
-#false-slide .mermaid {
-  max-width: 50%;
-  font-size: 50%;
-}
-
 .reveal section img {  
   box-shadow: unset;
   border: unset;

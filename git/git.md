@@ -115,8 +115,6 @@ stateDiagram
     CC --> [*]
 ```
 
-<!-- comment about leveraging bash commands for i in {1..10}; do git aa && git rebase --continue ; done -->
-
 ---
 
 
