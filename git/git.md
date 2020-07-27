@@ -1,13 +1,13 @@
 ---
-title: git to the rescue
+title: git to the rescue!
 theme: night
 revealOptions:
     transition: 'fade'
 ---
 <!-- .slide: id="frontmatter" -->
 
-## git to the rescue
-## Beers n' Learn 
+## git to the rescue!
+## Beers 'n' Learn 
 
 <img class="git-img" src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"
      alt="Git icon"
@@ -41,7 +41,7 @@ sha1 {
 
 Useful for configuring user name and email per repository. 
 
-Suppose my global email (associated to my SSH key) is `john.doe@mail.com` and I want to work with another account `jdoe@gmail.com` in a particular repo:
+Suppose my global email is `john.doe@mail.com` and I want to work with another account `jdoe@gmail.com` in a particular repo:
 
 ```bash
 git config --local user.name "jdoe"
@@ -51,13 +51,32 @@ git config --local user.email "jdoe@gmail.com"
 Also useful for aliases:
 
 ```bash
-git config --global alias.aa \
-   'commit --amend --author="jdoe<jdoe@gmail.com>"'
+git config --global alias.lg \
+   'log --graph --oneline --decorate --all'
+```
+
+### git remote
+
+Suppose we want to work with two different histories in the same repository:
+
+```bash
+git remote -v
+> origin git@github.com:ncordon/git-test.git (fetch)
+> origin git@github.com:ncordon/git-test.git (push)
+```
+
+```bash
+git remote add template git@github.com:ncordon/git-template.git
+```
+
+```bash
+git fetch template
+git reset --hard template/master
+git remote remove template
 ```
 
 ---
-
-<!-- .slide: id="first-slide" -->
+### git rebase
 
 ```mermaid
 stateDiagram
@@ -70,27 +89,6 @@ stateDiagram
 `git` stores a whole copy of the repo in each node, so what if we left a secret stored since A?
 
 ---
-### git remote
-
-Suppose we want to work with two different remote versions of the repository, e.g. I fork a repo I want to contribute to, want to do the changes in my remote forked repo `branch` and then push the branch to the original repo:
-
-```bash
-git remote -v
-> origin  https://github.com/ncordon/repo.git (fetch)
-> origin  https://github.com/ncordon/repo.git (push)
-```
-
-```bash
-git remote add upstream https://github.com/author/original.git
-```
-
-```bash
-git pull upstream/branch
-git push upstream/branch
-```
-
----
-### git rebase
 
 ```bash
 git rebase -i <commit hash | --root>
@@ -117,6 +115,7 @@ stateDiagram
 
 ---
 
+### git stash
 
 ```mermaid
 stateDiagram
@@ -146,6 +145,25 @@ git checkout master
 git fetch origin && git reset --hard origin/master
 git checkout -b new-branch
 git stash pop
+```
+
+---
+
+### git cherry-pick
+
+```mermaid
+stateDiagram
+    [*] --> A
+    A --> squash
+    A --> B
+    B --> C
+```
+
+```bash
+git checkout master
+git fetch origin && git reset --hard origin/master
+git checkout -b new-branch
+git cherry-pick C
 ```
 
 ---
