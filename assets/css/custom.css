@@ -1,0 +1,27 @@
+body {
+  background-color: #2b2a2a;
+  background: #2b2a2a;
+}
+
+p {
+  text-align: justify;
+}
+
+/* Center all mermaid diagrams */
+.mermaid {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.reveal section img {  
+  box-shadow: unset;
+  border: unset;
+  background: unset;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.git-img {
+  width:25%;
+}

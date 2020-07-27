@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>git to the rescue</title>
+    <link rel="stylesheet" href="./css/reveal.css" />
+    <link rel="stylesheet" href="./css/theme/night.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/zenburn.css" />
+    <link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="./assets/css/custom.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+<!-- .slide: id="frontmatter" -->
+
+## git to the rescue
+## Beers n' Learn 
+
+<img class="git-img" src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"
+     alt="Git icon"
+     style="float: center" />
+</script></section><section  data-markdown><script type="text/template">
+<img class="git-mess" src="https://i.redd.it/kdrpa186gx051.png"
+     alt="Git icon"
+     style="float: center" />
+</script></section><section  data-markdown><script type="text/template">
+### commit hash
+
+```bash
+sha1 {
+    commit message
+    committer
+    commit date
+    author
+    authoring date
+    Hash of tree structure for the directory
+    Parent hash(es)
+}
+```
+</script></section><section  data-markdown><script type="text/template">
+### git config
+
+Useful for configuring user name and email per repository. 
+
+Suppose my global email (associated to my SSH key) is `john.doe@mail.com` and I want to work with another account `jdoe@gmail.com` in a particular repo:
+
+```bash
+git config --local user.name "jdoe"
+git config --local user.email "jdoe@gmail.com" 
+```
+
+Also useful for aliases:
+
+```bash
+git config --global alias.aa \
+   'commit --amend --author="jdoe<jdoe@gmail.com>"'
+```
+</script></section><section  data-markdown><script type="text/template">
+<!-- .slide: id="first-slide" -->
+
+```mermaid
+stateDiagram
+    [*] --> A
+    A --> B
+    B --> C
+    C --> [*]
+```
+
+`git` stores a whole copy of the repo in each node, so what if we left a secret stored since A?
+</script></section><section  data-markdown><script type="text/template">### git remote
+
+Suppose we want to work with two different remote versions of the repository, e.g. I fork a repo I want to contribute to, want to do the changes in my remote forked repo `branch` and then push the branch to the original repo:
+
+```bash
+git remote -v
+> origin  https://github.com/ncordon/repo.git (fetch)
+> origin  https://github.com/ncordon/repo.git (push)
+```
+
+```bash
+git remote add upstream https://github.com/author/original.git
+```
+
+```bash
+git pull upstream/branch
+git push upstream/branch
+```
+</script></section><section  data-markdown><script type="text/template">### git rebase
+
+```bash
+git rebase -i <commit hash | --root>
+```
+
+would let us modify commits that happened after the provided hash.
+
+There is a better editor for the what `rebase prompts`: [`rebase-editor`](https://github.com/sjurba/rebase-editor): 
+
+```bash
+git config --global sequence.editor rebase-editor
+```
+</script></section><section  data-markdown><script type="text/template">If we run `git rebase -i A`, hashes would change and we would have to force push to `origin` to the corresponding branch: `git push --force`:
+
+```mermaid
+stateDiagram
+    [*] --> AA
+    AA --> BB
+    BB --> CC
+    CC --> [*]
+```
+</script></section><section  data-markdown><script type="text/template">
+
+```mermaid
+stateDiagram
+    [*] --> A
+    A --> master
+    A --> B
+```
+
+Let's suppose I (squash and) merge the branch into `master`, and continue working in own branch:
+
+</script></section><section  data-markdown><script type="text/template">
+```mermaid
+stateDiagram
+    [*] --> A
+    A --> squash
+    A --> B
+    B --> wip
+```
+
+where `wip` has not been commited. Then I could stash it, change to master, and pop from the stash:
+
+```bash
+git stash
+git checkout master
+git fetch origin && git reset --hard origin/master
+git checkout -b new-branch
+git stash pop
+```
+</script></section><section  data-markdown><script type="text/template">
+### Thanks for listening
+</script></section></div>
+    </div>
+
+    <script src="./js/reveal.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // Optional libraries used to extend on reveal.js
+      var deps = [
+        { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+        { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+        { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: './plugin/zoom-js/zoom.js', async: true },
+        { src: './plugin/notes/notes.js', async: true },
+        { src: './plugin/math/math.js', async: true }
+      ];
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        dependencies: deps
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal.getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"fade"}, queryOptions);
+    </script>
+
+    <script src="./assets/mermaid-min.js"></script>
+    <script src="./assets/reveal-mermaid.js"></script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
