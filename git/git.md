@@ -55,6 +55,8 @@ git config --global alias.lg \
    'log --graph --oneline --decorate --all'
 ```
 
+---
+
 ### git remote
 
 Suppose we want to work with two different histories in the same repository:
