@@ -21,7 +21,7 @@ revealOptions:
 
 ---
 
-### commit hash
+#### commit hash
 
 ```bash
 sha1 {
@@ -37,7 +37,7 @@ sha1 {
 
 ---
 
-### git config
+#### git config
 
 Useful for configuring user name and email per repository. 
 
@@ -57,7 +57,7 @@ git config --global alias.lg \
 
 ---
 
-### git remote
+#### git remote
 
 Suppose we want to work with two different histories in the same repository:
 
@@ -78,7 +78,9 @@ git remote remove template
 ```
 
 ---
-### git rebase
+<!-- .slide: id="rebase-ii" -->
+
+#### git rebase
 
 ```mermaid
 stateDiagram
@@ -105,6 +107,8 @@ git config --global sequence.editor rebase-editor
 ```
 
 ---
+<!-- .slide: id="rebase-ii" -->
+
 If we run `git rebase -i A`, hashes would change and we would have to force push to `origin` to the corresponding branch: `git push --force`:
 
 ```mermaid
@@ -117,7 +121,7 @@ stateDiagram
 
 ---
 
-### git stash
+#### git stash
 
 ```mermaid
 stateDiagram
@@ -130,6 +134,7 @@ Let's suppose I (squash and) merge the branch into `master`, and continue workin
 
 
 ---
+<!-- .slide: id="stash-ii" -->
 
 ```mermaid
 stateDiagram
@@ -150,8 +155,9 @@ git stash pop
 ```
 
 ---
+<!-- .slide: id="cherry-pick" -->
 
-### git cherry-pick
+#### git cherry-pick
 
 ```mermaid
 stateDiagram
