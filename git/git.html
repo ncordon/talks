@@ -28,7 +28,7 @@
      alt="Git icon"
      style="float: center" />
 </script></section><section  data-markdown><script type="text/template">
-### commit hash
+#### commit hash
 
 ```bash
 sha1 {
@@ -42,7 +42,7 @@ sha1 {
 }
 ```
 </script></section><section  data-markdown><script type="text/template">
-### git config
+#### git config
 
 Useful for configuring user name and email per repository. 
 
@@ -60,7 +60,7 @@ git config --global alias.lg \
    'log --graph --oneline --decorate --all'
 ```
 </script></section><section  data-markdown><script type="text/template">
-### git remote
+#### git remote
 
 Suppose we want to work with two different histories in the same repository:
 
@@ -79,7 +79,9 @@ git fetch template
 git reset --hard template/master
 git remote remove template
 ```
-</script></section><section  data-markdown><script type="text/template">### git rebase
+</script></section><section  data-markdown><script type="text/template"><!-- .slide: id="rebase-ii" -->
+
+#### git rebase
 
 ```mermaid
 stateDiagram
@@ -102,7 +104,9 @@ There is a better editor for the what `rebase prompts`: [`rebase-editor`](https:
 ```bash
 git config --global sequence.editor rebase-editor
 ```
-</script></section><section  data-markdown><script type="text/template">If we run `git rebase -i A`, hashes would change and we would have to force push to `origin` to the corresponding branch: `git push --force`:
+</script></section><section  data-markdown><script type="text/template"><!-- .slide: id="rebase-ii" -->
+
+If we run `git rebase -i A`, hashes would change and we would have to force push to `origin` to the corresponding branch: `git push --force`:
 
 ```mermaid
 stateDiagram
@@ -112,7 +116,7 @@ stateDiagram
     CC --> [*]
 ```
 </script></section><section  data-markdown><script type="text/template">
-### git stash
+#### git stash
 
 ```mermaid
 stateDiagram
@@ -123,7 +127,8 @@ stateDiagram
 
 Let's suppose I (squash and) merge the branch into `master`, and continue working in own branch:
 
-</script></section><section  data-markdown><script type="text/template">
+</script></section><section  data-markdown><script type="text/template"><!-- .slide: id="stash-ii" -->
+
 ```mermaid
 stateDiagram
     [*] --> A
@@ -141,8 +146,9 @@ git fetch origin && git reset --hard origin/master
 git checkout -b new-branch
 git stash pop
 ```
-</script></section><section  data-markdown><script type="text/template">
-### git cherry-pick
+</script></section><section  data-markdown><script type="text/template"><!-- .slide: id="cherry-pick" -->
+
+#### git cherry-pick
 
 ```mermaid
 stateDiagram

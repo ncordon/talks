@@ -1,3 +1,9 @@
+// Hat tip to https://github.com/webpro/reveal-md/issues/197
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark'
+});
+
 Reveal.addEventListener('slidechanged', event => {
     if (event.currentSlide) {
         event.currentSlide.querySelectorAll('.language-mermaid').forEach(item => {
@@ -8,12 +14,6 @@ Reveal.addEventListener('slidechanged', event => {
             item.parentNode.replaceWith(mermaidDiv);
         });
 
-        mermaid.init(event.currentSlide, '.mermaid');
+        mermaid.init(undefined, document.querySelectorAll(".mermaid"));
     }
-});
-
-// Hat tip to https://github.com/webpro/reveal-md/issues/197https://github.com/webpro/reveal-md/issues/197
-mermaid.initialize({
-    startOnLoad: false,
-    theme: 'dark'
 });
