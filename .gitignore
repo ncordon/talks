@@ -5,3 +5,13 @@ package-lock.json
 .idea
 *~
 docs
+
+# Reveal-md generated stuff
+assets/
+reset.css
+reveal.css
+reveal.scss
+*.html
+js/
+lib/
+plugin/
