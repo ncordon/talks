@@ -1,0 +1,17 @@
+language: node_js
+
+before_install:
+    - npm install -g reveal-md
+
+script:
+    - find . -maxdepth 1 -type f -delete
+    - for FOLDER in `ls -d */`; do cd $FOLDER && make; done
+
+deploy:
+    provider: pages
+    skip_cleanup: true
+    keep_history: true
+    github_token: $GITHUB_API_KEY
+    on:
+      branch: master
+  
