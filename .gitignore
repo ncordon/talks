@@ -1,4 +1,7 @@
+target/
 .DS_Store
-.vscode
-.metals
-graalvm
+node_modules
+package-lock.json
+.idea
+*~
+docs

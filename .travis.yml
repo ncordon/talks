@@ -1,11 +1,15 @@
 language: node_js
+dist: focal
 
 before_install:
+    # Updates node
+    - nvm install v14.8.0
     - npm install -g reveal-md
 
 script:
     - find . -maxdepth 1 -type f -delete
-    - for FOLDER in `ls -d */`; do cd $FOLDER && make && cd ..; done
+    - rm -r node_modules/
+    - for FOLDER in `ls -d */`; do cd ${FOLDER} && make && cd ..; done
 
 deploy:
     provider: pages
