@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>git to the rescue!</title>
-    <link rel="stylesheet" href="./dist/reveal.css" />
-    <link rel="stylesheet" href="./dist/theme/night.css" id="theme" />
+    <link rel="stylesheet" href="./css/reveal.css" />
+    <link rel="stylesheet" href="./css/theme/night.css" id="theme" />
     <link rel="stylesheet" href="./css/highlight/zenburn.css" />
+    <link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print" />
     <link rel="stylesheet" href="./assets/css/custom.css" />
 
   </head>
@@ -168,13 +169,8 @@ git cherry-pick C
 </script></section></div>
     </div>
 
-    <script src="./dist/reveal.js"></script>
+    <script src="./js/reveal.js"></script>
 
-    <script src="./plugin/markdown/markdown.js"></script>
-    <script src="./plugin/highlight/highlight.js"></script>
-    <script src="./plugin/zoom/zoom.js"></script>
-    <script src="./plugin/notes/notes.js"></script>
-    <script src="./plugin/math/math.js"></script>
     <script>
       function extend() {
         var target = {};
@@ -189,6 +185,16 @@ git cherry-pick C
         return target;
       }
 
+      // Optional libraries used to extend on reveal.js
+      var deps = [
+        { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+        { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+        { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: './plugin/zoom-js/zoom.js', async: true },
+        { src: './plugin/notes/notes.js', async: true },
+        { src: './plugin/math/math.js', async: true }
+      ];
+
       // default options to init reveal.js
       var defaultOptions = {
         controls: true,
@@ -196,17 +202,11 @@ git cherry-pick C
         history: true,
         center: true,
         transition: 'default', // none/fade/slide/convex/concave/zoom
-        plugins: [
-          RevealMarkdown,
-          RevealHighlight,
-          RevealZoom,
-          RevealNotes,
-          RevealMath
-        ]
+        dependencies: deps
       };
 
       // options from URL query string
-      var queryOptions = Reveal().getQueryHash() || {};
+      var queryOptions = Reveal.getQueryHash() || {};
 
       var options = extend(defaultOptions, {"transition":"fade"}, queryOptions);
     </script>
